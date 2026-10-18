@@ -1,0 +1,7 @@
+# The games of this core, a line each: <id>|<title> (hybrid/README.md,
+# "Several games in one core"). Each is a menu entry, _Other/dnk-<title>.mgl;
+# with several, its set name is ReNFS_<id> (short: 31 characters at most in
+# all). The zip has these lines as games/dnk/ReNFS/games.txt, from which the
+# database makes the launcher's catalogue (hybrid/launcher/distribution.py).
+# GAME: one line for a core with one game
+SE|Need for Speed SE

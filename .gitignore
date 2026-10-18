@@ -1,0 +1,6 @@
+# Game data is copyrighted and never committed
+# GAME: its file names or folders
+
+# Build outputs
+/build/
+/dist/
