@@ -51,7 +51,7 @@ savelog() {
 # For the hybrid core drivers in the binary: which core to attach to and its
 # default button mapping ("jn" in core/ReNFS.sv)
 export MISTER_HYBRID_CORE="$CORE"
-export MISTER_HYBRID_JN="A,B,X,Y,L,R,Select,Start"
+export MISTER_HYBRID_JN="A,B,R,L,X,Y,Select,Start"
 # Everything the game writes stays in its folder
 export HOME="$DATADIR"
 export XDG_CONFIG_HOME="$DATADIR/config"
@@ -69,10 +69,9 @@ GAME=
 # The game must not outlive us: on SIGTERM it saves its settings and quits
 trap '[ -n "$GAME" ] && kill "$GAME" 2>/dev/null && wait "$GAME"; savelog; exit 0' TERM INT
 while :; do
-    # GAME: its command line (where it finds data, settings and saved games:
-    # DATADIR, the current folder; what came with the port, libraries the game
-    # loads among them: GAMEDIR)
-    nice -n -20 taskset 0x03 "$GAMEDIR/ReNFS" >> "$RUNLOG" 2>&1 &
+    # The CD's files in NFSSE/ of DATADIR (the current folder), the game's
+    # settings, records, saved games and replays in saves/ there
+    nice -n -20 taskset 0x03 "$GAMEDIR/ReNFS" -home saves >> "$RUNLOG" 2>&1 &
     GAME=$!
     wait "$GAME"
     RC=$?

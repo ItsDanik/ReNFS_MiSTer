@@ -53,12 +53,11 @@ cp -r package/games/ReNFS/. "$G/"
 grep -v '^#' package/games.txt | grep '|' > "$G/games.txt"
 cp build/mister/renfs "$G/ReNFS"
 cp build/mister/mh_message "$G/mh_message"
-# GAME: files the binary needs next to it (never game data)
 hybrid/docker.sh arm-linux-gnueabihf-strip "$G/ReNFS" "$G/mh_message"
 chmod +x "$G/ReNFS" "$G/mh_message" "$G"/*.sh "$G/danik_hybrid_ports_ui" \
     "$OUT/Scripts/danik_hybrid_ports.sh" "$OUT/Scripts/.danik_hybrid_ports/danik_hybrid_ports_ui" \
     "$OUT/games/dnk/danik_hybrid_cores.sh"
-# GAME: the game's license as LICENSE-renfs.txt
+cp renfs/LICENSE "$G/LICENSE-renfs.txt"
 cp build/sdl/src/SDL2-*/LICENSE.txt "$G/LICENSE-sdl.txt"
 cp LICENSE "$G/LICENSE-gpl3.txt"
 rm -f "dist/ReNFS_$DATE.zip"

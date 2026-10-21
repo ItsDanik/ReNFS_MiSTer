@@ -69,8 +69,9 @@ localparam CONF_STR = {
 	// 240-line screen, entry 0 is 10, the default. Leave out the line of an
 	// edge the game has no HUD at, both and the "P1-;" if it has none.
 	"P1-;",
-	"P1O[81:77],HUD (Top),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
-	"P1O[86:82],HUD (Bottom),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
+	// (greyed while the races are not 320x240: menu mask bit 0)
+	"D0P1O[81:77],HUD (Top),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
+	"D0P1O[86:82],HUD (Bottom),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
 	"O[6:5],Stereo Mix,None,25%,50%,100%;",
 	// drawn by the hybrid library over the game's frames (MH_OSD_FPS)
 	"O[15],FPS Counter,Off,On;",
@@ -78,9 +79,29 @@ localparam CONF_STR = {
 	// A game can hide or grey out lines with MH_SetMenuMask(): "H0".."H3" and
 	// "D0".."D3" in front of a line (hidden / greyed while the bit is set,
 	// "h" and "d" while it is not).
-	// Sound Volume / Music Volume (bits 10:7 and 14:11) go here if the game
-	// mixes them separately, then the game's own options from bit 24 up,
-	// followed by "-;". The first entry of an option is its default.
+	// Sound Volume / Music Volume (bits 10:7 and 14:11) are not here: the
+	// game has its own (Options, Audio). The game's options from bit 24 up,
+	// read in renfs/port/src/mister.c; the first entry of an option is its
+	// default. Resolution is the races' (the menus are 640x480 always); the
+	// game's own line in Options, Graphics follows it.
+	"O[25:24],Resolution,320x200,320x240,640x480;",
+	"O[26],Smooth Motion,On,Off;",
+	"O[28:27],Rumble,On,Strong,Off;",
+	// Cheats: each line does what typing its code in Control Central does
+	// (renfs/port/src/mainmenu.c), while it is on; not in a tournament, as
+	// the original. No Mercy: as End held when a head to head starts.
+	"P2,Cheats;",
+	"P2-;",
+	"P2O[29],Mirrored Tracks,Off,On;",
+	"P2O[30],Rally Tracks,Off,On;",
+	"P2O[31],Lost Vegas,Off,On;",
+	"P2O[32],Warrior Car,Off,On;",
+	"P2O[33],Unlock All,Off,On;",
+	"P2O[34],Turbo,Off,On;",
+	"P2O[35],Nitro (R3),Off,On;",
+	"P2O[36],Explode (Horn),Off,On;",
+	"P2O[37],No Mercy,Off,On;",
+	"-;",
 	// Bits 16..23 were Menu OK / Menu Back up to host version 13: unused, a
 	// saved setting may still have them set.
 	// MiSTer's default map only knows the SNES-style pad. Main refuses to map a
@@ -89,11 +110,12 @@ localparam CONF_STR = {
 	// the MiSTer menu's own OK / Back (MH_MenuButtons()). J1 has the game's
 	// eight most important actions, the last one opens the game's menu; jn
 	// gives each of them a button of the default pad, Start for the menu. The
-	// game knows this list as buttons 0..9
-	// of the SDL joystick, the launcher repeats "jn" as MISTER_HYBRID_JN
+	// game knows this list as buttons 0..9 of the SDL joystick (the horn and
+	// the nitro are the sticks' clicks, L3 and R3, which the library reads),
+	// the launcher repeats "jn" as MISTER_HYBRID_JN
 	// (package/games/ReNFS/danik_hybrid_launch.sh).
-	"J1,Action 1,Action 2,Action 3,Action 4,Action 5,Action 6,Action 7,Menu,Menu OK,Menu Back;",
-	"jn,A,B,X,Y,L,R,Select,Start;",
+	"J1,Accelerate,Brake,Gear Up,Gear Down,Camera,Handbrake,Map,Pause,Menu OK,Menu Back;",
+	"jn,A,B,R,L,X,Y,Select,Start;",
 	"V,v",`BUILD_DATE
 };
 

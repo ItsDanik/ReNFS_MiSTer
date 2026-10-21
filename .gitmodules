@@ -2,3 +2,7 @@
 	path = hybrid
 	url = https://github.com/ItsDanik/Hybrid_MiSTer.git
 	branch = main
+[submodule "renfs"]
+	path = renfs
+	url = https://github.com/ItsDanik/ReNFS.git
+	branch = mister

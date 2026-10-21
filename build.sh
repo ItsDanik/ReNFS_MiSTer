@@ -20,10 +20,12 @@ if [ "$TARGET" = mister ]; then
     CROSS="$CROSS -DCMAKE_EXE_LINKER_FLAGS='-no-pie -static-libstdc++ -static-libgcc'"
 fi
 
-# GAME: the game's own CMake options go on the first cmake line (the option
-# that turns on its MiSTer code, bundled libraries instead of system ones)
+# the game's own CMake option: MISTER_HYBRID (its MiSTer code, src/mister.c); its
+# version worked out here, the container has no git
+RENFS_VERSION_IS=$(sh renfs/tools/version.sh)
 hybrid/docker.sh sh -c "
-  cmake -S renfs -B build/$TARGET -DCMAKE_BUILD_TYPE=$TYPE $CROSS \
+  export RENFS_VERSION_IS=$RENFS_VERSION_IS &&
+  cmake -S renfs/port -B build/$TARGET -DCMAKE_BUILD_TYPE=$TYPE $CROSS \
     -DCMAKE_PREFIX_PATH=$PREFIX -DMISTER_HYBRID=ON &&
   cmake --build build/$TARGET -j\$(nproc)"
 ls -la "build/$TARGET/renfs"
