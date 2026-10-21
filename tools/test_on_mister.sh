@@ -41,7 +41,7 @@ T=/tmp/${LOWER}_test
 # (shell patterns of their paths in the game's folder; "*" is all of them).
 # All, unless they do not fit in /tmp (246MB, with the package): then the
 # files the game writes, its settings and saved games.
-COPY="*"
+COPY="saves/*"     # (the CD's small files alone are 194MB; the game writes only saves/)
 
 remote() {
     ssh -o LogLevel=ERROR "$HOST" "$@"

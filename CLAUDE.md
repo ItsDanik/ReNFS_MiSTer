@@ -35,3 +35,21 @@
 - **GitHub**: `ItsDanik/ReNFS_MiSTer` public and the `mister` branch of `ItsDanik/ReNFS` pushed **once it runs on the MiSTer and Danik has tried it**. Local until then.
 - **Screenshots** in `docs/screenshots/` of both repositories, as OpenScreamer (made by a script from the PC build).
 - **The actual MiSTer is shared with other agents: ask Danik before every use of it** (tests, benchmarks, `tools/test_on_mister.sh`).
+
+### Measured on the MiSTer (2026-10-21, Replay 1: eight cars in the desert)
+
+`RENFS_PERF=1` (the game's speed lines) and `MISTER_HYBRID_PACE=1`, the replay started by
+`RENFS_REPLAY=REPLAY1.RPL` in `TEST_ENV`; `RENFS_RES=320|640`, `RENFS_SMOOTH=0|1` override the OSD.
+The race's steps cost 0.1-0.3 ms a picture: the time is the drawing.
+
+| Setting | A picture | Pictures a second | Shown twice / never, in 300 fields |
+|---|---|---|---|
+| 320x200, smooth, at once (`MISTER_HYBRID_AHEAD=0`) | 6-10 ms | 59.6 | up to 41 |
+| 320x200, smooth, drawn ahead | 6-10 ms | 59.6 | 0 |
+| 640x480, smooth or not, a picture every field | 13-24 ms | 37-59 | up to 177 |
+| 640x480, no smooth, a picture a step | 13-24 ms | 33.3 (every step) | (the same picture sent again) |
+
+Decisions: **drawing ahead kept** (`mister_present_at()`, `MH_PresentAtField(F + 2)`: it takes the
+320x200 stutter from 41 to 0). Without smooth motion the MiSTer draws a race picture only for a
+new step (`race.c`): at 640x480 every step is shown, 33.3 a second, as the original. 640x480 cannot
+draw 60 pictures a second here, so smooth motion there gains nothing.
