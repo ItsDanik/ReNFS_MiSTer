@@ -44,7 +44,7 @@
   (not the framework's 10 first), read by `mister_hud_bottom()`, greyed at 200 lines.
 - **The movies' corrupt field** (Danik, 2026-10-22): a palette change went out a field before
   its picture drawn ahead; pictures with new colours are now sent at once.
-- **The OSD open in a race pauses the race.**
+- **The OSD open in a race does not pause it** (Danik, 2026-10-22, changed from the interview's "pauses"): as on all his cores, and HUD (Bottom) is seen moving as it is changed. The framework gives the game no input meanwhile, so the car rolls on.
 - **Buttons**: `J1,Accelerate,Brake,Gear Up,Gear Down,Camera,Handbrake,Map,Pause,Menu OK,Menu Back` with `jn,A,B,R,L,X,Y,Select,Start`; R2 / L2 accelerate and brake too, analogue (`MH_ReadTriggers()`); **L3 the horn, R3 the nitro** (`MH_ReadStickButtons()`); Start the pause menu (Esc).
 - **Analogue on the MiSTer is automatic**: a pad's stick and triggers steer and drive progressively from the start (on the PC they need Joystick in Options -> Controls, as the original; that rule stays on the PC).
 - **Rumble**: an OSD line Off / On / Strong, **On** by default.
