@@ -24,6 +24,14 @@
 
 - **Resolution**: an OSD line (races at 320x200, 320x240, 640x480), and the game's own row in the graphics screen follows it. Whether 640x480 races stay on the list is **decided after measuring** on the MiSTer.
 - **Smooth motion** (the port's in-between pictures, F11 on the PC): an OSD line, on by default if the MiSTer is fast enough (measured).
+- **After measuring (Danik, 2026-10-21)**: 640x480 races stay, **Smooth Motion greyed out while
+  640x480 is chosen** (33 pictures a second there); 640x480 is 480i on a 15 kHz screen and progressive
+  on 31 kHz / HDMI. **Defaults: 320x200, Smooth On.** **Races at 320x240, and also 640x200 and
+  640x240** (as OpenScreamer's modes): the Resolution line has all five. Written 2026-10-21
+  (renfs NOTES §4.27): 640x240 / 640x200 the 640x480 race with only the shown rows painted;
+  320x240 the 320x200 screen stretched with the 3D view at 240 rows of its own (`tall.c`; the
+  cockpit's frame rules out moving the dashboard apart as OpenScreamer did). Not measured on
+  the MiSTer yet.
 - **The OSD open in a race pauses the race.**
 - **Buttons**: `J1,Accelerate,Brake,Gear Up,Gear Down,Camera,Handbrake,Map,Pause,Menu OK,Menu Back` with `jn,A,B,R,L,X,Y,Select,Start`; R2 / L2 accelerate and brake too, analogue (`MH_ReadTriggers()`); **L3 the horn, R3 the nitro** (`MH_ReadStickButtons()`); Start the pause menu (Esc).
 - **Analogue on the MiSTer is automatic**: a pad's stick and triggers steer and drive progressively from the start (on the PC they need Joystick in Options -> Controls, as the original; that rule stays on the PC).

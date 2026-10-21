@@ -83,24 +83,25 @@ localparam CONF_STR = {
 	// game has its own (Options, Audio). The game's options from bit 24 up,
 	// read in renfs/port/src/mister.c; the first entry of an option is its
 	// default. Resolution is the races' (the menus are 640x480 always); the
-	// game's own line in Options, Graphics follows it.
-	"O[25:24],Resolution,320x200,320x240,640x480;",
-	"O[26],Smooth Motion,On,Off;",
-	"O[28:27],Rumble,On,Strong,Off;",
+	// game's own line in Options, Graphics follows it. Smooth Motion is
+	// greyed while the races are 640x480 (mask bit 1: too slow for 60 there).
+	"O[26:24],Resolution,320x200,320x240,640x200,640x240,640x480;",
+	"D1O[27],Smooth Motion,On,Off;",
+	"O[29:28],Rumble,On,Strong,Off;",
 	// Cheats: each line does what typing its code in Control Central does
 	// (renfs/port/src/mainmenu.c), while it is on; not in a tournament, as
 	// the original. No Mercy: as End held when a head to head starts.
 	"P2,Cheats;",
 	"P2-;",
-	"P2O[29],Mirrored Tracks,Off,On;",
-	"P2O[30],Rally Tracks,Off,On;",
-	"P2O[31],Lost Vegas,Off,On;",
-	"P2O[32],Warrior Car,Off,On;",
-	"P2O[33],Unlock All,Off,On;",
-	"P2O[34],Turbo,Off,On;",
-	"P2O[35],Nitro (R3),Off,On;",
-	"P2O[36],Explode (Horn),Off,On;",
-	"P2O[37],No Mercy,Off,On;",
+	"P2O[30],Mirrored Tracks,Off,On;",
+	"P2O[31],Rally Tracks,Off,On;",
+	"P2O[32],Lost Vegas,Off,On;",
+	"P2O[33],Warrior Car,Off,On;",
+	"P2O[34],Unlock All,Off,On;",
+	"P2O[35],Turbo,Off,On;",
+	"P2O[36],Nitro (R3),Off,On;",
+	"P2O[37],Explode (Horn),Off,On;",
+	"P2O[38],No Mercy,Off,On;",
 	"-;",
 	// Bits 16..23 were Menu OK / Menu Back up to host version 13: unused, a
 	// saved setting may still have them set.
