@@ -38,6 +38,12 @@
   (the night's busy stretch); 640x240 without smooth 33.3 steady. So Smooth Motion stays
   allowed at all four (greyed only at 640x480). The core's screenshots: 320x240 and 640x240
   pictures as the PC's.
+- **HUD (Bottom), 0 by default; HUD (Top) always greyed** (Danik, 2026-10-22, after the
+  replay's bar was hidden by his CRT): lifts the replay's / watching bar and, from outside,
+  the small rev counter and the map (renfs NOTES §4.27); the line's entries 0..24 in order
+  (not the framework's 10 first), read by `mister_hud_bottom()`, greyed at 200 lines.
+- **The movies' corrupt field** (Danik, 2026-10-22): a palette change went out a field before
+  its picture drawn ahead; pictures with new colours are now sent at once.
 - **The OSD open in a race pauses the race.**
 - **Buttons**: `J1,Accelerate,Brake,Gear Up,Gear Down,Camera,Handbrake,Map,Pause,Menu OK,Menu Back` with `jn,A,B,R,L,X,Y,Select,Start`; R2 / L2 accelerate and brake too, analogue (`MH_ReadTriggers()`); **L3 the horn, R3 the nitro** (`MH_ReadStickButtons()`); Start the pause menu (Esc).
 - **Analogue on the MiSTer is automatic**: a pad's stick and triggers steer and drive progressively from the start (on the PC they need Joystick in Options -> Controls, as the original; that rule stays on the PC).

@@ -64,14 +64,17 @@ localparam CONF_STR = {
 	"P1O[68:64],Horizontal Size,0,+1,+2,+3,+4,+5,+6,+7,-24,-23,-22,-21,-20,-19,-18,-17,-16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1;",
 	"P1O[72:69],Horizontal Pos,0,+1,+2,+3,+4,+5,+6,+7,-8,-7,-6,-5,-4,-3,-2,-1;",
 	"P1O[76:73],Vertical Pos,0,+1,+2,+3,+4,+5,+6,+7,-8,-7,-6,-5,-4,-3,-2,-1;",
-	// GAME: the HUD margins (MH_HudMargins(), hybrid/README.md "HUD
-	// margins"): pixels between the HUD and the top / bottom edge of a
-	// 240-line screen, entry 0 is 10, the default. Leave out the line of an
-	// edge the game has no HUD at, both and the "P1-;" if it has none.
+	// GAME: the HUD margins (hybrid/README.md "HUD margins"). ReNFS keeps
+	// its status bar where the game has it (HUD (Top) always greyed: menu
+	// mask bit 2) and lifts its bottom HUD (the replay's bar, from outside
+	// the small rev counter and the map) by HUD (Bottom)'s lines of a
+	// 240-line screen, twice in 480 lines; greyed while the races have 200
+	// lines (bit 0). Danik, 2026-10-22: 0 by default, so its entries run
+	// 0..24 in order (not the framework's 10 first), read in
+	// renfs/port/src/mister.c (mister_hud_bottom), not MH_HudMargins().
 	"P1-;",
-	// (greyed while the races are not 320x240: menu mask bit 0)
-	"D0P1O[81:77],HUD (Top),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
-	"D0P1O[86:82],HUD (Bottom),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
+	"D2P1O[81:77],HUD (Top),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
+	"D0P1O[86:82],HUD (Bottom),0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24;",
 	"O[6:5],Stereo Mix,None,25%,50%,100%;",
 	// drawn by the hybrid library over the game's frames (MH_OSD_FPS)
 	"O[15],FPS Counter,Off,On;",
