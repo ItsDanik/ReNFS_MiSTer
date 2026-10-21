@@ -2,13 +2,15 @@
 
 Need for Speed SE on [MiSTer FPGA](https://github.com/MiSTer-devel/Main_MiSTer/wiki) as a hybrid port.
 
-*The Need for Speed Special Edition* (Electronic Arts Canada, 1996, MS-DOS) through [ReNFS](https://github.com/ItsDanik/ReNFS), the game's program written again by hand from the original, and on the PC as well. The whole single-player game: every car and track, head to head, single race, time trial, tournaments, the rally, police and traffic, replays, the cars' showcase, records, saved tournaments, the original's codes, music and speech. It runs on the MiSTer's ARM CPU. The ReNFS FPGA core provides native 15kHz video (CRT, VGA and HDMI): the menus at 640x480 as in the original, the races at 320x200, 320x240 or 640x480; 44.1kHz audio, and keyboard, mouse and gamepad input with rumble. The two halves talk through shared DDR3 memory.
+*The Need for Speed Special Edition* (Electronic Arts Canada, 1996, MS-DOS) through [ReNFS](https://github.com/ItsDanik/ReNFS), the game's program written again by hand from the original, and on the PC as well. The whole single-player game: every car and track, head to head, single race, time trial, tournaments, the rally, police and traffic, replays, the cars' showcase, records, saved tournaments, the original's codes, music and speech. It runs on the MiSTer's ARM CPU. The ReNFS FPGA core provides native 15kHz video (CRT, VGA and HDMI): the menus at 640x480 as in the original, the races at 320x200, 320x240, 640x200, 640x240 or 640x480; 44.1kHz audio, and keyboard, mouse and gamepad input with rumble. The two halves talk through shared DDR3 memory.
 
 | | |
 |---|---|
 | ![Alpine at evening, a race at 640x480](docs/screenshots/race_alpine_evening_640x480.png) | ![The desert from behind the car, 320x200](docs/screenshots/race_desert_320x200.png) |
 | ![The city at 640x480](docs/screenshots/race_city_640x480.png) | ![A circuit from the driver's seat, 320x200](docs/screenshots/race_circuit_320x200.png) |
 | ![Control Central, the main menu (640x480)](docs/screenshots/menu_control_central_640x480.png) | ![The cars' showcase (640x480)](docs/screenshots/menu_showcase_640x480.png) |
+| ![The city at 320x240: the 3D view drawn with all 240 lines](docs/screenshots/race_city_320x240.png) | ![Alpine at evening, 640x240 (shown at 4:3)](docs/screenshots/race_alpine_evening_640x240.png) |
+| ![The desert at 640x200 (shown at 4:3)](docs/screenshots/race_desert_640x200.png) | ![A replay at 320x240 with HUD (Bottom) at 12: the bar lifted off the screen's bottom edge](docs/screenshots/replay_hud_bottom_320x240.png) |
 
 > **Beta.** Expect rough edges and please report problems in the issues.
 
