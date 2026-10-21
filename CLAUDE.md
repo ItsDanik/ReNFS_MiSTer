@@ -30,8 +30,14 @@
   640x240** (as OpenScreamer's modes): the Resolution line has all five. Written 2026-10-21
   (renfs NOTES §4.27): 640x240 / 640x200 the 640x480 race with only the shown rows painted;
   320x240 the 320x200 screen stretched with the 3D view at 240 rows of its own (`tall.c`; the
-  cockpit's frame rules out moving the dashboard apart as OpenScreamer did). Not measured on
-  the MiSTer yet.
+  cockpit's frame rules out moving the dashboard apart as OpenScreamer did). **Measured
+  2026-10-21** (Replay 1, `RENFS_PERF=1 MISTER_HYBRID_PACE=1`, drawing ahead, every 5 s;
+  pictures a second, ms a picture, pictures of 300 shown a field late): 320x200 smooth 59.5 to
+  59.7, 6 to 8 ms, 0 to 1; 320x240 smooth 58.2 to 59.7, 7.4 to 10.1 ms, 0 to 7; 640x200 smooth
+  59.2 to 59.7, 9.4 to 13.1 ms, 0 to 3; 640x240 smooth 57.2 to 59.7, 10.3 to 14.7 ms, 0 to 32
+  (the night's busy stretch); 640x240 without smooth 33.3 steady. So Smooth Motion stays
+  allowed at all four (greyed only at 640x480). The core's screenshots: 320x240 and 640x240
+  pictures as the PC's.
 - **The OSD open in a race pauses the race.**
 - **Buttons**: `J1,Accelerate,Brake,Gear Up,Gear Down,Camera,Handbrake,Map,Pause,Menu OK,Menu Back` with `jn,A,B,R,L,X,Y,Select,Start`; R2 / L2 accelerate and brake too, analogue (`MH_ReadTriggers()`); **L3 the horn, R3 the nitro** (`MH_ReadStickButtons()`); Start the pause menu (Esc).
 - **Analogue on the MiSTer is automatic**: a pad's stick and triggers steer and drive progressively from the start (on the PC they need Joystick in Options -> Controls, as the original; that rule stays on the PC).
