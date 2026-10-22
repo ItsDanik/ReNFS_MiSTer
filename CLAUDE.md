@@ -73,3 +73,16 @@ Decisions: **drawing ahead kept** (`mister_present_at()`, `MH_PresentAtField(F +
 320x200 stutter from 41 to 0). Without smooth motion the MiSTer draws a race picture only for a
 new step (`race.c`): at 640x480 every step is shown, 33.3 a second, as the original. 640x480 cannot
 draw 60 pictures a second here, so smooth motion there gains nothing.
+
+### The painters made faster (2026-10-22)
+
+The heaviest scene (Danik): REPLAY.RPL (alpine) from the SKY camera, which the replay switches
+to by itself from about 25 s, at 640x240 with smooth motion. The painters were made faster with
+every picture the same (renfs NOTES §4.28, `RENFS_SHOTSUMS`): measured on the MiSTer from 30 s on,
+
+| Build | A picture (avg / worst 5 s / slowest) | Pictures a second (avg / min) | Fields without a new picture |
+|---|---|---|---|
+| before | 14.0 / 16.7 / 22.7 ms | 56.3 / 51.2 | 605 of 9000 |
+| after | 8.4 / 9.7 / 17.3 ms | 59.6 / 59.1 | 6 of 9000 |
+
+640x480 is not measured again yet: smooth motion there may now be worth trying (ask Danik).
