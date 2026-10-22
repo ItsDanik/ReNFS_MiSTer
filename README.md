@@ -4,6 +4,8 @@ Need for Speed SE on [MiSTer FPGA](https://github.com/MiSTer-devel/Main_MiSTer/w
 
 *The Need for Speed Special Edition* (Electronic Arts Canada, 1996, MS-DOS) through [ReNFS](https://github.com/ItsDanik/ReNFS), the game's program written again by hand from the original, and on the PC as well. The whole single-player game: every car and track, head to head, single race, time trial, tournaments, the rally, police and traffic, replays, the cars' showcase, records, saved tournaments, the original's codes, music and speech. It runs on the MiSTer's ARM CPU. The ReNFS FPGA core provides native 15kHz video (CRT, VGA and HDMI): the menus at 640x480 as in the original, the races at 320x200, 320x240, 640x200, 640x240 or 640x480; 44.1kHz audio, and keyboard, mouse and gamepad input with rumble. The two halves talk through shared DDR3 memory.
 
+![The title screen (640x480)](docs/screenshots/title_640x480.png)
+
 | | |
 |---|---|
 | ![Alpine at evening, a race at 640x480](docs/screenshots/race_alpine_evening_640x480.png) | ![The desert from behind the car, 320x200](docs/screenshots/race_desert_320x200.png) |
