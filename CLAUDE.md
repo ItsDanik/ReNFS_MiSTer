@@ -85,4 +85,6 @@ every picture the same (renfs NOTES §4.28, `RENFS_SHOTSUMS`): measured on the M
 | before | 14.0 / 16.7 / 22.7 ms | 56.3 / 51.2 | 605 of 9000 |
 | after | 8.4 / 9.7 / 17.3 ms | 59.6 / 59.1 | 6 of 9000 |
 
-640x480 is not measured again yet: smooth motion there may now be worth trying (ask Danik).
+Danik: "performance is great". **Possible future optimizations (not now, Danik 2026-10-22):**
+640x480 measured again (smooth motion there may now pay; Smooth Motion is greyed there); the
+painting split over the ARM's two cores (the second only copies the pictures to the core).
