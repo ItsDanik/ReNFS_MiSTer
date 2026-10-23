@@ -106,5 +106,15 @@ painting split over the ARM's two cores (the second only copies the pictures to 
   300, the handover at 348, "Loading Need for Speed SE..." 32 fields after, the first frame
   at 605, 2 s after the logo was in; a file missing; no data, from the menu entry and the
   core itself; *Save Diagnostic Report*: the zip, info text 17, read with `diag_read.py`).
-  On the MiSTer: not yet (the start, `list`, `nodata`, a file missing, `TEST_USB=1`, the
-  HUD options while a race runs, the report; drawing ahead benchmarked again).
+- On the MiSTer with `tools/test_on_mister.sh` (2026-10-23): the menu entry (Danik saw the
+  logo, then the game); `list` (one game there: started at once; quitting by Exit to system ?
+  -> Yes back to the MiSTer menu, as it should with no list); `nodata`; two CD files taken out
+  of the test's copy (`FRONTEND/ART/TRACKSEL/COASTSEL.QFS`, `SIMDATA/CARSPECS/ANSX.PBS`: both
+  named under the MiSTer logo, no game logo, from the menu entry and from the core itself);
+  `TEST_USB=1` SE (runs, writes `saves/` there) and `nodata` (`usb0/games/dnk/.ReNFS_empty/`).
+- **Drawing ahead benchmarked again, kept** (the rule in `hybrid/CLAUDE.md`): REPLAY.RPL from
+  the SKY camera at 640x240 with smooth motion (`RENFS_PERF=1 MISTER_HYBRID_PACE=1`), three runs
+  of 180 s each way in turns, counted from 30 s of the race on (25 times 300 frames a run):
+  drawn ahead 8.6-8.7 ms a picture (slowest 17.0-21.1), 59.6 a second, 2 to 3 pictures shown a
+  field late in 7,500 (0.03-0.04%, at most 1 in 300); `MISTER_HYBRID_AHEAD=0` the same speed
+  but 102 to 141 late (1.4-1.9%, up to 14 in 300).
