@@ -59,6 +59,7 @@ The game's log is in `/media/fat/logs/dnk/ReNFS/renfs.log`. Its settings, record
 | Smooth Motion | **On**: a new picture at every field, the cars and the camera moved on between the game's 33 steps a second; **Off**: a new picture only at each step, as the original. The game plays the same either way. Greyed out at 640x480, which the MiSTer cannot draw 60 times a second |
 | Rumble | the original's force-feedback effects on the pad's motors (walls, cars, the road, gear changes, a crash): **On**, **Strong** or **Off**. A force-feedback wheel gets the original's forces |
 | Cheats | the original's codes, typed in Control Central, as switches; each does what typing it does while it is on (not in a tournament, as in the original): *Mirrored Tracks* (SKCART), *Rally Tracks* (EARALLYE), *Lost Vegas* (CASINOVILLE), *Warrior Car* (CONCEPTCAR), *Unlock All* (ROCKYROAD, kept in the records once used), *Turbo* (TURBO: a faster game), *Nitro* (NITRO: R3 or N with Shift for full revs), *Explode* (EXPLODE: the horn throws the cars near you into the air), *No Mercy* (End held on head to head: no police, no traffic). On a keyboard they can still be typed |
+| Save Diagnostic Report | the last line: see [If something is wrong](#if-something-is-wrong) |
 
 ## Controls
 
@@ -141,6 +142,12 @@ The toolchain image (Debian bullseye, glibc 2.31 to match the MiSTer) is built f
   ```
 - `MISTER=root@<address> tools/test_on_mister.sh <id>` tries the build on a MiSTer next to what is installed there, without installing it: from `/tmp`, with the installed game's folder mirrored there (what the game writes stays in `/tmp`) and its own OSD settings. `list` and `nodata` for the core started by itself and without data, `log` for the game's log, `stop` to remove all of it again.
 - `touch /tmp/renfs_nolaunch` on the MiSTer keeps the core loaded without starting the game, so you can start a development binary by hand (set `MISTER_HYBRID_CORE=ReNFS`, and `MISTER_HYBRID_SET` for a game's set name). `/tmp/danik_hybrid_ports.log` shows what the launcher daemon did.
+
+## If something is wrong
+
+If the game stutters, the sound breaks up or something else is wrong, open the OSD while it happens and pick **Save Diagnostic Report**, the last line of the menu. The game keeps running; MiSTer's info box says the report is saved in `games/dnk/diagnostics/` on the SD card. Send that file (`ReNFS_<date>_<time>.zip`) with a few words on what went wrong.
+
+The report has the setup (versions, the video and audio lines of `MiSTer.ini`, the OSD settings), how the last 60 seconds went, the game's log and a screenshot. Nothing else: no network settings, addresses, saved games or lists of your files.
 
 ## Support
 

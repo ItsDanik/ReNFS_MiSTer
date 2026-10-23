@@ -40,8 +40,9 @@
   pictures as the PC's.
 - **HUD (Bottom), 0 by default; HUD (Top) always greyed** (Danik, 2026-10-22, after the
   replay's bar was hidden by his CRT): lifts the replay's / watching bar and, from outside,
-  the small rev counter and the map (renfs NOTES §4.27); the line's entries 0..24 in order
-  (not the framework's 10 first), read by `mister_hud_bottom()`, greyed at 200 lines.
+  the small rev counter and the map (renfs NOTES §4.27); `mister_hud_bottom()` reads it with
+  `MH_HudMargins()` (since host version 16 the framework's entries are 0..24 in order too),
+  greyed at 200 lines (menu mask bit 0); HUD (Top) greyed by the core's `HUD_EDGES` 2'b10.
 - **The movies' corrupt field** (Danik, 2026-10-22): a palette change went out a field before
   its picture drawn ahead; pictures with new colours are now sent at once.
 - **The OSD open in a race does not pause it** (Danik, 2026-10-22, changed from the interview's "pauses"): as on all his cores, and HUD (Bottom) is seen moving as it is changed. The framework gives the game no input meanwhile, so the car rolls on.
@@ -88,3 +89,22 @@ every picture the same (renfs NOTES §4.28, `RENFS_SHOTSUMS`): measured on the M
 Danik: "performance is great". **Possible future optimizations (not now, Danik 2026-10-22):**
 640x480 measured again (smooth motion there may now pay; Smooth Motion is greyed there); the
 painting split over the ARM's two cores (the second only copies the pictures to the core).
+
+### Host version 17 (2026-10-23)
+
+- Built against Hybrid_MiSTer 68871f4: the game's logo at its start (`package/logos/SE.png`,
+  Danik's, 440x200, reduced to 255 colours by `make_logo.py`) in the start order of hybrid
+  5186586; *Save Diagnostic Report* and the info texts; the HUD lines of host version 16
+  (entry n n pixels, 0 the default, `HUD_EDGES` 2'b10: HUD (Top) greyed); the MT32-pi's
+  ports; `MIDI_SYNTH` 0 (Danik: the music is EA's streams; no synthesizer, no SoundFont, no
+  *Music* / *SoundFont* / MT32-pi lines). The CD's files are looked for before the pick
+  (`game_missing()` in `mister.c`): one missing, its message under the MiSTer logo, no game
+  logo. No "Loading" message of the port's own: `MH_PickGame()`'s. Cheats looked for again:
+  none beyond the page's nine (Danik: unchanged). `build_core.sh` the template's (`job.sh`).
+- Core: 31% of the logic, 25% of the RAM blocks, 71% of the DSP blocks, worst slack +0.246 ns.
+- Tried on the PC with `fakecore` (the menu entry: the two lines 24 fields apart from field
+  300, the handover at 348, "Loading Need for Speed SE..." 32 fields after, the first frame
+  at 605, 2 s after the logo was in; a file missing; no data, from the menu entry and the
+  core itself; *Save Diagnostic Report*: the zip, info text 17, read with `diag_read.py`).
+  On the MiSTer: not yet (the start, `list`, `nodata`, a file missing, `TEST_USB=1`, the
+  HUD options while a race runs, the report; drawing ahead benchmarked again).

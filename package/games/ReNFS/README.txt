@@ -6,7 +6,8 @@ through ReNFS, the game's program written again by hand from the original
 (https://github.com/ItsDanik/ReNFS). The whole single-player game. It runs
 on the MiSTer's ARM CPU; the ReNFS FPGA core provides native 15kHz video
 (CRT, VGA and HDMI): the menus at 640x480 as in the original, the races at
-320x200, 320x240 or 640x480; audio, and input with rumble.
+320x200, 320x240, 640x200, 640x240 or 640x480; audio, and input with
+rumble.
 
 Disclaimer: AI is being used to speed up development of this project.
 
@@ -57,16 +58,25 @@ OSD options
                 Vertical Pos fit the picture to it. The pixels stay as they
                 are; HDMI is not affected. The size is for the game's
                 picture: the core's own, with its messages, keeps its
-                width. Not there with forced_scandoubler=1.
+                width. HUD (Bottom) lifts the replay's bar and, from
+                outside the car, the small rev counter and the map by that
+                many lines, for a screen that hides its bottom edge (0 by
+                default; at 320x240, 640x240 and 640x480). HUD (Top) is
+                greyed: the status bar stays where the game has it. Not
+                there with forced_scandoubler=1.
   Resolution    the races' picture: 320x200 as the original's low
-                resolution; 320x240 the same with more of the road and sky,
-                the dashboard at the HUD (Top) / HUD (Bottom) margins of
-                the CRT Options; 640x480 as the original's high resolution
+                resolution; 320x240 the same picture filling a 15kHz
+                screen's 240 lines, the road and the cars drawn with all of
+                them; 640x200 and 640x240 the original's high resolution
+                with 200 or 240 of its lines (at 15kHz without
+                interlacing); 640x480 as the original's high resolution
                 (interlaced on a 15kHz screen). The menus are 640x480
-                always. From the next race.
+                always. Options, Graphics in the game shows the choice.
+                From the next race.
   Smooth Motion On: a new picture at every field, the cars and the camera
                 moved on between the game's 33 steps a second. Off: a new
-                picture only at each step, as the original.
+                picture only at each step, as the original. Greyed out at
+                640x480, which the MiSTer cannot draw 60 times a second.
   Rumble        the original's force-feedback effects on the pad: On,
                 Strong or Off. A force-feedback wheel gets its forces.
   Cheats        the original's codes as switches, each doing what typing
@@ -77,6 +87,8 @@ OSD options
                 (a faster game), Nitro (R3: full revs), Explode (the horn
                 throws the cars near you into the air), No Mercy (head to
                 head without police and traffic).
+  Save Diagnostic Report
+                the last line: see "If something is wrong" below.
 
 Controls
   Keyboard and mouse:
@@ -111,7 +123,19 @@ Controls
   Circle on PlayStation, A / B on Xbox and on Nintendo.
   Change the buttons in the OSD under "Define ReNFS buttons". "Menu OK" and
   "Menu Back" there are only needed for a spare button without a game
-  function. While the OSD is open, the game gets no input.
+  function. While the OSD is open, the game gets no input; a race goes on
+  behind it (press Start for the pause menu first if you want it held).
+
+If something is wrong
+  If the game stutters, the sound breaks up or something else is wrong,
+  open the OSD while it happens and pick Save Diagnostic Report, the last
+  line of the menu. The game keeps running; MiSTer's info box says the
+  report is saved in games/dnk/diagnostics/ on the SD card. Send that file
+  (ReNFS_<date>_<time>.zip) with a few words on what went wrong. The
+  report has the setup (versions, the video and audio lines of MiSTer.ini,
+  the OSD settings), how the last 60 seconds went, the game's log and a
+  screenshot. Nothing else: no network settings, addresses, saved games or
+  lists of your files.
 
 Files
   games/dnk/ReNFS/saves/                the game's settings, records,

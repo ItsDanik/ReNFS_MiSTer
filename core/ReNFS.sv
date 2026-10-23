@@ -22,7 +22,6 @@ module emu
 ///////// Default values for ports not used in this core /////////
 
 assign ADC_BUS  = 'Z;
-assign USER_OUT = '1;
 assign {UART_RTS, UART_TXD, UART_DTR} = 0;
 assign {SD_SCK, SD_MOSI, SD_CS} = 'Z;
 assign {SDRAM_DQ, SDRAM_A, SDRAM_BA, SDRAM_CLK, SDRAM_CKE, SDRAM_DQML, SDRAM_DQMH, SDRAM_nWE, SDRAM_nCAS, SDRAM_nRAS, SDRAM_nCS} = 'Z;
@@ -64,17 +63,17 @@ localparam CONF_STR = {
 	"P1O[68:64],Horizontal Size,0,+1,+2,+3,+4,+5,+6,+7,-24,-23,-22,-21,-20,-19,-18,-17,-16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1;",
 	"P1O[72:69],Horizontal Pos,0,+1,+2,+3,+4,+5,+6,+7,-8,-7,-6,-5,-4,-3,-2,-1;",
 	"P1O[76:73],Vertical Pos,0,+1,+2,+3,+4,+5,+6,+7,-8,-7,-6,-5,-4,-3,-2,-1;",
-	// GAME: the HUD margins (hybrid/README.md "HUD margins"). ReNFS keeps
-	// its status bar where the game has it (HUD (Top) always greyed: menu
-	// mask bit 2) and lifts its bottom HUD (the replay's bar, from outside
-	// the small rev counter and the map) by HUD (Bottom)'s lines of a
-	// 240-line screen, twice in 480 lines; greyed while the races have 200
-	// lines (bit 0). Danik, 2026-10-22: 0 by default, so its entries run
-	// 0..24 in order (not the framework's 10 first), read in
-	// renfs/port/src/mister.c (mister_hud_bottom), not MH_HudMargins().
+	// The HUD margins (MH_HudMargins(), hybrid/README.md "HUD margins"),
+	// 0 the default (host version 16; up to 15 entry 0 was 10). ReNFS keeps
+	// its status bar where the game has it (HUD (Top) always greyed:
+	// HUD_EDGES below) and lifts its bottom HUD (the replay's bar, from
+	// outside the small rev counter and the map) by HUD (Bottom)'s lines of
+	// a 240-line screen, twice in 480 lines (Danik, 2026-10-22); greyed
+	// while the races have 200 lines (menu mask bit 0), read in
+	// renfs/port/src/mister.c (mister_hud_bottom).
 	"P1-;",
-	"D2P1O[81:77],HUD (Top),10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0,1,2,3,4,5,6,7,8,9;",
-	"D0P1O[86:82],HUD (Bottom),0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24;",
+	"D0D7P1O[81:77],HUD (Top),0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24;",
+	"D0D8P1O[86:82],HUD (Bottom),0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24;",
 	"O[6:5],Stereo Mix,None,25%,50%,100%;",
 	// drawn by the hybrid library over the game's frames (MH_OSD_FPS)
 	"O[15],FPS Counter,Off,On;",
@@ -106,8 +105,13 @@ localparam CONF_STR = {
 	"P2O[37],Explode (Horn),Off,On;",
 	"P2O[38],No Mercy,Off,On;",
 	"-;",
-	// Bits 16..23 were Menu OK / Menu Back up to host version 13: unused, a
-	// saved setting may still have them set.
+	// Bits 16..23 were Menu OK / Menu Back up to host version 13 (a saved
+	// setting may still have them set): 16 is Save Diagnostic Report's since
+	// host version 16 (a trigger, which the core flips), 17..23 unused.
+	// The last line of every core's menu (host version 16, hybrid/docs/diagnostics.md):
+	// the library saves a report of the setup and the last 60 seconds in
+	// games/dnk/diagnostics/ (bit 16, flipped by hybrid_host at each pulse)
+	"T[16],Save Diagnostic Report;",
 	// MiSTer's default map only knows the SNES-style pad. Main refuses to map a
 	// button twice, so Menu OK/Back here are for spare buttons without a game
 	// function and unmapped by default; menus also confirm and go back with
@@ -120,12 +124,40 @@ localparam CONF_STR = {
 	// (package/games/ReNFS/danik_hybrid_launch.sh).
 	"J1,Accelerate,Brake,Gear Up,Gear Down,Camera,Handbrake,Map,Pause,Menu OK,Menu Back;",
 	"jn,A,B,R,L,X,Y,Select,Start;",
+	// Main_MiSTer's info box shows text n when hybrid_host asks for it
+	// (`info`): 1..13 the MT32-pi's synth, 14..16 the SoundFont's errors
+	// (MH_INFO_*), 17 and 18 the diagnostic report's, then empty ones up to
+	// 23; a game's own texts follow from 24. In every core (the report's
+	// texts; the MIDI ones are not asked for in a core without MIDI). It
+	// stays after the last line of the OSD's main page
+	// (hybrid/template/core/@NAME@.sv).
+	"I,MT32-pi: SoundFont 0,MT32-pi: SoundFont 1,MT32-pi: SoundFont 2,MT32-pi: SoundFont 3,",
+	"MT32-pi: SoundFont 4,MT32-pi: SoundFont 5,MT32-pi: SoundFont 6,MT32-pi: SoundFont 7,",
+	"MT32-pi: MT-32 v1,MT32-pi: MT-32 v2,MT32-pi: CM-32L,MT32-pi: unknown synth,",
+	"MT32-pi: SoundFont 8 or later,",
+	"No SoundFont found\nFM music instead\nCopy GeneralUser-GS.sf2 to\ngames/dnk/SoundFonts/,",
+	"The SoundFont is damaged\nor no SoundFont 2 file\nFM music instead,",
+	"The SoundFont is too big\n(over 64 MB)\nFM music instead,",
+	"Diagnostic report saved\nin games/dnk/diagnostics/,",
+	"Diagnostic report not saved\n(no space or the folder\ncannot be written),,,,,;",
 	"V,v",`BUILD_DATE
 };
+
+// The edges the game has a HUD at, bit 0 the top, bit 1 the bottom: the
+// other's HUD line is greyed out (menu mask bits 7 and 8). The bottom only:
+// the status bar at the top stays where the game has it (Danik, 2026-10-22).
+localparam [1:0] HUD_EDGES = 2'b10;
+
+// No MIDI synthesizer: the game's music is EA's streams (.ASF), played as
+// sound (Danik, 2026-10-23)
+localparam MIDI_SYNTH = 0;
 
 wire         forced_scandoubler;
 wire         direct_video;
 wire   [3:0] menumask;
+wire         mt32_on;
+wire         info_req;
+wire   [7:0] info;
 wire   [1:0] buttons;
 wire [127:0] status;
 wire  [10:0] ps2_key;
@@ -147,7 +179,11 @@ hps_io #(.CONF_STR(CONF_STR)) hps_io
 
 	.buttons(buttons),
 	.status(status),
-	.status_menumask({10'd0, direct_video, forced_scandoubler, menumask}),
+	// bit 6: an MT32-pi is connected (no lines of its own here); 7 and 8: no
+	// HUD at the top / the bottom ("D7", "D8": its line greyed out)
+	.status_menumask({7'd0, ~HUD_EDGES[1], ~HUD_EDGES[0], mt32_on, direct_video, forced_scandoubler, menumask}),
+	.info_req(info_req),
+	.info(info),
 
 	.joystick_0(joystick_0),
 	.joystick_1(joystick_1),
@@ -196,7 +232,7 @@ wire       hires, fast, f1;
 // `fast` follows vga31, and falls only after the output has gone quiet
 assign VGA_DISABLE = fast & ~forced_scandoubler;
 
-hybrid_host host
+hybrid_host #(.MIDI_SYNTH(MIDI_SYNTH)) host
 (
 	.clk(clk_sys),
 	.reset(reset),
@@ -244,7 +280,15 @@ hybrid_host host
 	.menumask(menumask),
 
 	.audio_l(AUDIO_L),
-	.audio_r(AUDIO_R)
+	.audio_r(AUDIO_R),
+
+	// an MT32-pi on the user port (MIDI music, host version 15)
+	.clk_audio(CLK_AUDIO),
+	.user_in(USER_IN),
+	.user_out(USER_OUT),
+	.mt32_on(mt32_on),
+	.info_req(info_req),
+	.info(info)
 );
 
 assign DDRAM_CLK = clk_sys;
