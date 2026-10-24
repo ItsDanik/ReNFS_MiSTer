@@ -53,7 +53,7 @@
 - **Cheats**: an OSD page with On/Off lines, remembered, each doing what typing its code does: Mirrored Tracks (SKCART), Rally Tracks (EARALLYE), Lost Vegas (CASINOVILLE), Warrior Car (CONCEPTCAR), Rocky Road (ROCKYROAD), Turbo (TURBO), Nitro (NITRO), Explode (EXPLODE), No Mercy (End held as a head to head starts). A keyboard still types them as in the original.
 - **English only** on the MiSTer (no language line).
 - **Names typed with the pad**: up / down change the letter under the cursor, right the next letter, left back, Menu OK confirms; a keyboard types as before.
-- **GitHub**: `ItsDanik/ReNFS_MiSTer` public and the `mister` branch of `ItsDanik/ReNFS` pushed **once it runs on the MiSTer and Danik has tried it**. Local until then.
+- **GitHub**: `ItsDanik/ReNFS_MiSTer` public and the `mister` branch of `ItsDanik/ReNFS` pushed **once it runs on the MiSTer and Danik has tried it**. Done 2026-10-24, with the first release published to the database (ReNFS_20261024).
 - **Screenshots** in `docs/screenshots/` of both repositories, as OpenScreamer (made by a script from the PC build).
 - **The actual MiSTer is shared with other agents: ask Danik before every use of it** (tests, benchmarks, `tools/test_on_mister.sh`).
 
