@@ -29,7 +29,7 @@ With `update_all` (Downloader 2.4 or newer, which update_all keeps up to date):
 2. Run `update_all`. That installs the launcher, **danik_hybrid_ports**, in `Scripts`.
 3. Run **danik_hybrid_ports** from the `Scripts` menu, tick the games you want and press *X: Apply*. They are installed, and update_all keeps them up to date.
 4. Copy **everything** on the game's CD, all its files and folders as they are, into `/media/fat/games/dnk/ReNFS/NFSSE/` (so that there is `games/dnk/ReNFS/NFSSE/NFS_DOS.EXE`, `games/dnk/ReNFS/NFSSE/FRONTEND/` and so on). Upper or lower case does not matter. If files are missing, the core says which.
-5. Load the game from the `Other` menu, e.g. **dnk-Need for Speed SE**.
+5. Load the game from the `Other` menu, e.g. **dnk-Need for Speed SE**, or from the `Hybrid Ports` folder if you moved the games there in the launcher.
 
 > [!NOTE]
 > The game data can go on a USB drive instead, into the same folder there (`/media/usb0/games/dnk/ReNFS/NFSSE/`): the game looks for it there first, and then keeps its settings and saved games there as well. Everything else stays on the SD card.
