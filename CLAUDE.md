@@ -18,7 +18,8 @@
 - The game's own repository is `~/renfs` (`github.com/ItsDanik/ReNFS`, public, GPL-3; branch `main` is the PC version, 0.6.0b released). Its `CLAUDE.md` is the summary of the reverse engineering, `docs/NOTES.md` the full record, **`docs/HANDOVER.md` where the work stands**. The submodule here is its branch `mister`: `main` merged in, plus the MiSTer code behind `MISTER_HYBRID`.
 - **Two builds of `NFS_DOS.EXE` are accepted** (2026-10-25, ReNFS_20261025): ours of 19 June 1996
   and the 17 June one of EA's 1997 CD (a player's: "not the version ReNFS knows"); they differ only
-  where the port reads nothing (renfs NOTES §1). Our CD copy has three bits flipped there too.
+  where the port reads nothing (renfs NOTES §1). Our CD copy has three bits flipped (read errors) in
+  `TECHNO1.AS4`, `CL2_T01.FAM` and `TR2_M01.FAM`, where the 1997 CD is right.
 - The game is a hand-written reimplementation of `NFS_DOS.EXE` (Watcom, DOS/4GW), as OpenScreamer is of Screamer (`~/MiSTer-openscreamer`, the model for this core).
 - The player copies the CD's files only (the ISO extracted): **the whole CD into `games/dnk/ReNFS/NFSSE/`** (as on the PC, the folder beside the program); settings, records, saved games, replays and the joystick's calibration in `games/dnk/ReNFS/saves/` (Danik, 2026-10-21).
 - Video: **the front end exists only at 640x480**; the menus stay 640x480 on the MiSTer, interlaced on a 15 kHz screen (Danik, 2026-10-18).
