@@ -59,6 +59,7 @@
 - **Names typed with the pad**: up / down change the letter under the cursor, right the next letter, left back, Menu OK confirms; a keyboard types as before.
 - **GitHub**: `ItsDanik/ReNFS_MiSTer` public and the `mister` branch of `ItsDanik/ReNFS` pushed **once it runs on the MiSTer and Danik has tried it**. Done 2026-10-24, with the first release published to the database (ReNFS_20261024).
 - **Screenshots** in `docs/screenshots/` of both repositories, as OpenScreamer (made by a script from the PC build).
+- `package/screens/SE.png` (dnkLauncher, `hybrid/docs/dnklauncher.md`; 2026-10-25): taken on the PC with `fakecore` at 320x200, `MISTER_HYBRID_FPS=0`, `RENFS_RACE=cl1` (Coastal 1, which the README's screenshots do not show), the Camera button three times (the far chase view), Accelerate held and Gear Up once.
 - **The actual MiSTer is shared with other agents: ask Danik before every use of it** (tests, benchmarks, `tools/test_on_mister.sh`).
 
 ### Measured on the MiSTer (2026-10-21, Replay 1: eight cars in the desert)

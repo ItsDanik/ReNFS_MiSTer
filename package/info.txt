@@ -1,0 +1,4 @@
+# The games of package/games.txt for dnkLauncher, the frontend (hybrid/docs/dnklauncher.md),
+# a line each: <id>|<year>|<developer>|<description>. The description is shown on the
+# game's Details page, at most 4 lines there (about 340 characters).
+SE|1996|EA Canada|The Need for Speed's Special Edition: the exotic cars of the mid-nineties, from the Lamborghini Diablo to the Ferrari 512TR, on circuits and on open roads with traffic and the police. The Special Edition added two tracks, Burnt Sienna and Lost Vegas.
