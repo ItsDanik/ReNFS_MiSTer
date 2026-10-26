@@ -3,7 +3,9 @@
 # in the layout of the hybrid ports (hybrid/README.md, "Naming and layout"):
 #   _Other/dnk-<title>.mgl             a menu entry for each game (package/games.txt)
 #   _Other/dnk/dnk-ReNFS_<date>.rbf    the core, not in the menu itself
-#   games/dnk/ReNFS/                   the game, its logos in logos/
+#   games/dnk/ReNFS/                   the game, its logos in logos/, its
+#                                      pictures for tty2oled+'s display in
+#                                      oled/ and their details in info.txt
 #   Scripts/danik_hybrid_ports.sh       the launcher, and its screen in
 #   Scripts/.danik_hybrid_ports/        (copies of both with the game: the
 #                                       newest one installed is the one used)
@@ -58,6 +60,11 @@ grep -v '^#' package/games.txt | grep '|' | while IFS='|' read -r id title; do
     [ -f "package/logos/$id.png" ] || { echo "package/logos/$id.png is missing: every game of package/games.txt has its logo, 440x200 (hybrid/docs/game_logo.md)" >&2; exit 1; }
     python3 hybrid/tools/make_logo.py "package/logos/$id.png" "$G/logos/$id.mhl" > /dev/null
 done
+# each game's logo and icon for tty2oled+'s OLED display, oled/<id>_logo.gsc and
+# oled/<id>_icon.gsc, and info.txt with its year, developer and description
+# (hybrid/docs/oled.md): from package/oled/<id>_icon.png, package/oled/<id>_logo.png
+# or else the game's logo, and package/info.txt
+python3 hybrid/tools/make_oled.py package package "$G"
 cp build/mister/renfs "$G/ReNFS"
 cp build/mister/mh_message "$G/mh_message"
 hybrid/docker.sh arm-linux-gnueabihf-strip "$G/ReNFS" "$G/mh_message"
