@@ -34,6 +34,9 @@ With `update_all` (Downloader 2.4 or newer, which update_all keeps up to date):
 > [!NOTE]
 > The game data can go on a USB drive instead, into the same folder there (`/media/usb0/games/dnk/ReNFS/NFSSE/`): the game looks for it there first, and then keeps its settings and saved games there as well. Everything else stays on the SD card.
 
+> [!IMPORTANT]
+> **HDMI or VGA:** if you play on HDMI or on a VGA monitor rather than a 15kHz CRT, open the OSD and set *HDMI Only* to **Yes**. The game's menus are drawn at 640x480, which is interlaced for a CRT and shows combing on any other screen without it.
+
 The game's log is in `/media/fat/logs/dnk/ReNFS/renfs.log`. Its settings, records, saved tournaments and replays are in `games/dnk/ReNFS/saves/`.
 
 ## The launcher
@@ -61,12 +64,13 @@ Run it from the `Scripts` menu again whenever you want to change something. Its 
 |---|---|
 | Aspect ratio, Scale, Scandoubler Fx, Stereo Mix | as in other cores |
 | FPS Counter | shows the pictures per second in the top left corner |
-| HDMI Only | **Yes** if no CRT is connected: resolutions of 640x400 and more are then progressive instead of interlaced, and the analog output is switched off while one is shown, so that a 15kHz screen can never get such a signal. Nothing changes at lower resolutions. Not needed with `forced_scandoubler=1` (VGA monitor); not there with `direct_video=1` |
-| CRT Options | **Horizontal Size**: the picture's width<br>**Horizontal Pos**: moves it left or right<br>**Vertical Pos**: moves it up or down<br>**HUD (Top)**: always greyed out, the status bar stays where the game has it<br>**HUD (Bottom)**: lifts the replay's bar, the small rev counter and the map 0 to 24 lines off the bottom edge (default 0), at 320x240, 640x240 and 640x480<br><br>For a 15kHz screen: fits the picture to it and keeps the HUD out of the overscan. HDMI is not affected; not there with `forced_scandoubler=1` |
+| HDMI Only | **Yes** if no CRT is connected: resolutions of 640x400 and more are then progressive instead of interlaced, and so is the core's own screen before the game, which moves at 60 pictures a second for a CRT and shows fine lines on HDMI without it, as do the game's menus at 640x480. The analog output is switched off while one is shown, so that a 15kHz screen can never get such a signal. Nothing changes at lower resolutions. Not needed with `forced_scandoubler=1` (VGA monitor); not there with `direct_video=1` |
+| CRT Options | **Horizontal Size**: the picture's width<br>**Horizontal Pos**: moves it left or right<br>**Vertical Pos**: moves it up or down<br>**HUD (Top)**: always greyed out, the status bar stays where the game has it<br>**HUD (Bottom)**: lifts the replay's bar, the small rev counter and the map 0 to 24 lines off the bottom edge (default 0), at 320x240, 640x240 and 640x480<br>**Flicker Filter**: Strong (default), Light or Off: softens fine lines that blink while the picture is interlaced<br><br>For a 15kHz screen: fits the picture to it and keeps the HUD out of the overscan. HDMI is not affected but by the Flicker Filter; not there with `forced_scandoubler=1` |
 | Resolution | **320x200**: the original's low resolution (default)<br>**320x240**: the same, the road and the cars drawn with all 240 lines<br>**640x200**: the original's high resolution in 200 lines<br>**640x240**: the same in 240 lines<br>**640x480**: the original's high resolution, interlaced at 15kHz<br><br>The races' picture; the menus are always 640x480. Options, Graphics in the game shows the choice. From the next race |
 | Smooth Motion | **On**: a new picture every field, moved on between the game's 33 steps a second (default)<br>**Off**: a new picture at each step, as the original<br><br>The game plays the same either way. Greyed out at 640x480, which the MiSTer cannot draw 60 times a second |
 | Rumble | **On**: the original's force-feedback effects on the pad's motors (default)<br>**Strong**: the same, stronger<br>**Off**: none<br><br>Walls, cars, the road, gear changes, a crash. A force-feedback wheel gets the original's forces |
 | Cheats | **Mirrored Tracks**: the tracks mirrored (SKCART)<br>**Rally Tracks**: the rally tracks (EARALLYE)<br>**Lost Vegas**: the Lost Vegas track (CASINOVILLE)<br>**Warrior Car**: the Warrior car (CONCEPTCAR)<br>**Unlock All**: everything unlocked, kept in the records (ROCKYROAD)<br>**Turbo**: a faster game (TURBO)<br>**Nitro (R3)**: R3 or Shift+N for full revs (NITRO)<br>**Explode (Horn)**: the horn throws nearby cars into the air (EXPLODE)<br>**No Mercy**: no police and no traffic in head to head<br><br>The original's codes as switches, each doing what typing it in Control Central does, not in a tournament. On a keyboard they can still be typed |
+| Reset | starts the game again from its beginning, as the USER button does |
 | Save Diagnostic Report | the last line: see [If something is wrong](#if-something-is-wrong) |
 
 ## Controls

@@ -6,6 +6,8 @@
 #   games/dnk/ReNFS/                   the game, its logos in logos/, its
 #                                      pictures for tty2oled+'s display in
 #                                      oled/ and their details in info.txt
+#   games/dnk/SoundFonts/              GeneralUser GS and its licence, if the
+#                                      games play MIDI (MIDI_SYNTH 1)
 #   Scripts/danik_hybrid_ports.sh       the launcher, and its screen in
 #   Scripts/.danik_hybrid_ports/        (copies of both with the game: the
 #                                       newest one installed is the one used)
@@ -65,6 +67,11 @@ done
 # (hybrid/docs/oled.md): from package/oled/<id>_icon.png, package/oled/<id>_logo.png
 # or else the game's logo, and package/info.txt
 python3 hybrid/tools/make_oled.py package package "$G"
+# the SoundFont of the core's MIDI synthesizer, for a core that has it
+# (MIDI_SYNTH 1): fetched at its pinned version, never committed
+if grep -q '^localparam MIDI_SYNTH = 1;' core/ReNFS.sv; then
+    sh hybrid/tools/soundfont.sh "$OUT/games/dnk/SoundFonts"
+fi
 cp build/mister/renfs "$G/ReNFS"
 cp build/mister/mh_message "$G/mh_message"
 hybrid/docker.sh arm-linux-gnueabihf-strip "$G/ReNFS" "$G/mh_message"

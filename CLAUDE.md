@@ -123,3 +123,40 @@ painting split over the ARM's two cores (the second only copies the pictures to 
   drawn ahead 8.6-8.7 ms a picture (slowest 17.0-21.1), 59.6 a second, 2 to 3 pictures shown a
   field late in 7,500 (0.03-0.04%, at most 1 in 300); `MISTER_HYBRID_AHEAD=0` the same speed
   but 102 to 141 late (1.4-1.9%, up to 14 in 300).
+
+### Host version 18 (2026-10-28)
+
+- Built against Hybrid_MiSTer 1498830 (96e3fde, host version 18, plus CLAUDE.md lines
+  and a template change): the core's own picture (the purple screen, the logo, the fades)
+  moves at every field; the game's reset (the USER button or the OSD's *Reset*,
+  `"R0,Reset;"` before *Save Diagnostic Report*: the library ends the game with exit code 44
+  and the template's launch script starts it again, `MISTER_HYBRID_RESET`); `INTRO` 1;
+  **`FLICKER` 2** (the front end is always 640x480 and races can be: 480i on a 15 kHz
+  screen): *Flicker Filter* Strong / Light / Off on *CRT Options* after *Vertical Pos*,
+  Strong the default (Danik, 2026-10-28, after trying Light on the MiSTer: "the default
+  value of the flicker filter should be strong (it looks great)"; `FLICKER` 2 is the
+  framework's value for that, the line's entries `Strong,Light,Off`),
+  greyed out while the picture is not interlaced. README: the *HDMI Only* row as the
+  template's (with the menus), the *Flicker Filter* line, the *Reset* row. `package.sh`
+  took the template's SoundFont lines (nothing with `MIDI_SYNTH` 0), `.gitignore` `*.log`.
+- **The front end at field rate** (Danik, 2026-10-28: "any cores that have 480i should
+  become 480i/60 (nfs menu, midiplayer)"): `field_rate()` in `renfs/port/src/mister.c`,
+  called at every retrace and by `mister_racing()`, asks for `MH_SetFieldRate(1)` while no
+  race runs and the mode is 640x480, 0 in a race (640x480 races stay a picture in two
+  fields) and at the exit (`mister_exit_code()`). Nothing else changed: the front end
+  already drew a picture at every retrace (a field, `mister_retrace_wait()`) and times
+  itself by the 100 Hz clock (`clock_ticks()`, the system's) and in retraces, neither of
+  which field rate changes, so nothing in it runs faster; at field
+  rate every one of those pictures is shown, 59.6 a second on a CRT, each a field later
+  (`MH_PresentAtField(g_field + 2)` now holds it, as in the progressive modes). The change
+  is uncommitted in the `renfs` submodule (branch `mister`; `main` has no MiSTer code).
+- Core (fitter seed 1, built again with `FLICKER` 2): 32% of the logic, 27% of the RAM
+  blocks (12 more for the flicker filter), 71% of the DSP blocks; setup +0.401 ns at
+  worst, hold +0.230.
+- On the PC against fakecore with `FAKECORE_LACE=1 FAKECORE_FLICKER=1`, `MISTER_HYBRID_PACE=1`:
+  the menu entry to Control Central at 640x480i, field rate on (status bit 31) and every
+  one of 300 frames in the next field; a race at 640x480 (`RENFS_RACE=cl1`) field rate
+  off, a frame per two fields; `MH_HasFlickerFilter()` 1; the script's `reset` ended the
+  game with exit code 44, started again with `MISTER_HYBRID_RESET=1` the game came back.
+  Not yet tried on the MiSTer: the front end's real time a picture at field rate there
+  (the FPS counter) and the Flicker Filter's look.
